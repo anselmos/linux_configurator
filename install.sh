@@ -16,12 +16,18 @@ function install_dependencies(){
 }
 function apt_get_install(){
     package_to_install=$1
-    command='apt-get install -y '$package_to_install
-    echo $command
+    command_with_echo 'apt-get install -y '$package_to_install
+}
+function command_with_echo(){
+    command=$1
+    echo 'Making command: '$command
     $command
 }
 function install_docker(){
     echo "Installing docker!"
+    apt_get_install docker.io
+    command_with_echo 'sudo usermod -aG docker '$USER
+    command_with_echo 'sudo xhost local:'$USER
 }
 
 function clear_apt_get(){
