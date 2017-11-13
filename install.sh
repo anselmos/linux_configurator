@@ -14,6 +14,13 @@ function apt_get_install(){
     command_with_echo 'apt-get install -y '$package_to_install
 }
 
+function get_docker_apps(){
+    echo "Getting all docker apps with X11 compatibility!"
+    docker_keepassx
+}
+function docker_keepassx(){
+    wget https://raw.githubusercontent.com/anselmos/docker-keepassx/master/run -O keepassx && chmod +x keepassx && cp keepassx /usr/share/bin
+}
 function update_release() {
     echo "update_release function"
     command_with_echo 'apt-get update'
@@ -48,6 +55,7 @@ if [ $RELEASE_NAME="Ubuntu" ]; then
     echo "Starting configuring new linux"
     update_release
     install_dependencies
+    get_docker_apps
     clear_apt_get
 else
     unmet_release
