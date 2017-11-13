@@ -17,9 +17,24 @@ function apt_get_install(){
 function get_docker_apps(){
     echo "Getting all docker apps with X11 compatibility!"
     docker_keepassx
+    docker_chrome
 }
 function docker_keepassx(){
+    docker pull anselmos/keepassx:2.0.alpha2
     wget https://raw.githubusercontent.com/anselmos/docker-keepassx/master/run -O keepassx && chmod +x keepassx && cp keepassx /usr/share/bin
+}
+function docker_chrome(){
+    docker pull c0b0/chrome-stable:52.0.2743.116
+    #TODO add run to separated repo.
+    echo "docker run \
+    -d \
+    -e DISPLAY=unix$DISPLAY \
+    --privileged \
+    -v /tmp/.X11-unix:/tmp/.X11-unix \
+    -v $HOME/.keepassx/:/home/developer/data/ \
+    c0b0/chrome-stable:52.0.2743.116"> google-chrome
+    sudo cp google-chrome /usr/share/bin/
+
 }
 function update_release() {
     echo "update_release function"
