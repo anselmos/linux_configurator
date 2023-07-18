@@ -6,7 +6,7 @@ echo "deb http://repository.spotify.com stable non-free" | sudo tee /etc/apt/sou
 sudo apt update && sudo apt install spotify-client -y
 
 # skype:
-wget -O https://go.skype.com/skypeforlinux-64.deb skype.deb
+wget https://go.skype.com/skypeforlinux-64.deb -O skype.deb
 sudo dpkg -i skype.deb
 
 # create opts dir:
@@ -15,7 +15,7 @@ mkdir -p ${HOME}/opts/
 # pycharm:
 
 VERSION=2023.1.4
-wget -O https://download.jetbrains.com/python/pycharm-professional-${VERSION}.tar.gz ${HOME}/opts/pycharm-professional-${VERSION}.tar.gz
+wget https://download.jetbrains.com/python/pycharm-professional-${VERSION}.tar.gz -O ${HOME}/opts/pycharm-professional-${VERSION}.tar.gz
 cd ${HOME}/opts && tar -zxvf pycharm-professional-${VERSION}.tar.gz 
 rm -rf ${HOME}/opts/pycharm-professional-${VERSION}.tar.gz
 sudo ln -s ${HOME}/opts/pycharm-professional-${VERSION}/pycharm/bin/pycharm.sh /usr/bin/pycharm
@@ -23,14 +23,14 @@ sudo ln -s ${HOME}/opts/pycharm-professional-${VERSION}/pycharm/bin/pycharm.sh /
 
 # phpstorm:
 VERSION=2023.1.4
-wget -O https://download.jetbrains.com/webide/PhpStorm-${VERSION}.tar.gz ${HOME}/opts/PhpStorm-${VERSION}.tar.gz
+wget https://download.jetbrains.com/webide/PhpStorm-${VERSION}.tar.gz -O ${HOME}/opts/PhpStorm-${VERSION}.tar.gz
 cd ${HOME}/opts && tar -zxvf PhpStorm-${VERSION}.tar.gz 
 rm -rf ${HOME}/opts/PhpStorm-${VERSION}.tar.gz
 sudo ln -s ${HOME}/opts/PhpStorm-${VERSION}/phpstorm/bin/phpstorm.sh /usr/bin/phpstorm
 
 
 # Postman:
-wget -O https://dl.pstmn.io/download/latest/linux ${HOME}/opts/Postman.tar.gz
+wget https://dl.pstmn.io/download/latest/linux -O ${HOME}/opts/Postman.tar.gz
 
 cd ${HOME}/opts && tar -zxvf Postman.tar.gz 
 rm -rf ${HOME}/opts/Postman.tar.gz
