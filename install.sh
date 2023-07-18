@@ -42,16 +42,40 @@ function update_release() {
 }
 function install_dependencies(){
     echo "installing dependencies"
-    apt_get_install vim
-    apt_get_install tmux
-    apt_get_install git
+    apt_get_install vim git curl wget gcc make tar
+    apt_get_install gcc make
+    apt_get_install libevent-dev libncurses-dev
+    apt_get_install ca-certificates curl gnupg
+    install_tmux
     install_docker
+}
+function install_tmux(){
+    echo "Installing tmux 3.0!"
+    VERSION=3.0a
+    wget https://github.com/tmux/tmux/releases/download/${VERSION}/tmux-${VERSION}.tar.gz
+    tar xf tmux-${VERSION}.tar.gz
+    rm -f tmux-${VERSION}.tar.gz
+    cd tmux-${VERSION}
+    ./configure
+    make
+    sudo make install
+    # cd -
+    # sudo rm -rf /usr/local/src/tmux-*
+    # sudo mv tmux-${VERSION} /usr/local/src
 }
 function install_docker(){
     echo "Installing docker!"
-    apt_get_install docker.io
+    command_with_echo 'sudo install -m 0755 -d /etc/apt/keyrings'
+    command_with_echo 'curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo gpg --dearmor -o /etc/apt/keyrings/docker.gpg'
+    command_with_echo 'sudo chmod a+r /etc/apt/keyrings/docker.gpg'
+    command_with_echo 'echo \
+  "deb [arch="$(dpkg --print-architecture)" signed-by=/etc/apt/keyrings/docker.gpg] https://download.docker.com/linux/ubuntu \
+  "$(. /etc/os-release && echo "$VERSION_CODENAME")" stable" | \
+  sudo tee /etc/apt/sources.list.d/docker.list > /dev/null'
+    update_release
+    apt_get_install docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin
     command_with_echo 'sudo usermod -aG docker '$USER
-    command_with_echo 'sudo xhost local:'$USER
+    # command_with_echo 'sudo xhost local:'$USER
 }
 
 function clear_apt_get(){
@@ -70,7 +94,7 @@ if [ $RELEASE_NAME="Ubuntu" ]; then
     echo "Starting configuring new linux"
     update_release
     install_dependencies
-    get_docker_apps
+    # get_docker_apps
     clear_apt_get
 else
     unmet_release
