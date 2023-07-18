@@ -10,8 +10,7 @@ function command_with_echo(){
 }
 
 function apt_get_install(){
-    package_to_install=$1
-    command_with_echo 'apt-get install -y '$package_to_install
+    command_with_echo 'apt-get install -y '"$@"
 }
 
 function get_docker_apps(){
@@ -42,10 +41,10 @@ function update_release() {
 }
 function install_dependencies(){
     echo "installing dependencies"
-    apt_get_install vim git curl wget gcc make tar
-    apt_get_install gcc make
-    apt_get_install libevent-dev libncurses-dev
-    apt_get_install ca-certificates curl gnupg
+    apt_get_install "vim git curl wget gcc make tar"
+    apt_get_install "gcc make"
+    apt_get_install "libevent-dev libncurses-dev"
+    apt_get_install "ca-certificates curl gnupg"
     install_tmux
     install_docker
 }
