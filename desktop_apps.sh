@@ -19,7 +19,7 @@ VERSION=2023.1.4
 wget https://download.jetbrains.com/python/pycharm-professional-${VERSION}.tar.gz -O ${HOME}/opts/pycharm-professional-${VERSION}.tar.gz
 PYCHARM_DIR=${HOME}/opts/pycharm
 mkdir -p ${PYCHARM_DIR}
-cd ${HOME}/opts && tar -zxvf pycharm-professional-${VERSION}.tar.gz -C ${PYCHARM_DIR} --strip-compoments=1
+cd ${HOME}/opts && tar -zxvf pycharm-professional-${VERSION}.tar.gz -C ${PYCHARM_DIR} --strip-components=1
 rm -rf ${HOME}/opts/pycharm-professional-${VERSION}.tar.gz
 sudo ln -s ${USER_HOME}/opts/pycharm/bin/pycharm.sh /usr/bin/pycharm
 
