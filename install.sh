@@ -95,7 +95,10 @@ function remove_snap(){
     sudo snap remove core20
     sudo snap remove snapd-desktop-integration
     sudo rm -rf /var/cache/snapd/
-    sudo apt autoremove --purge snapd
+    sudo apt autoremove --purge snapd -y
+}
+function remove_thunderbird(){
+    sudo apt autoremove --purge thunderbird -y
 }
 function install_firefox(){
     sudo add-apt-repository ppa:mozillateam/ppa -y
@@ -113,6 +116,7 @@ if [ $RELEASE_NAME="Ubuntu" ]; then
     echo "Starting configuring new linux"
     update_release
     remove_snap
+    remove_thunderbird
     install_firefox
     install_dependencies
     # get_docker_apps
