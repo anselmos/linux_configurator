@@ -83,6 +83,26 @@ function clear_apt_get(){
     apt-get autoclean
 }
 
+function remove_snap(){
+    echo "clearing apt-get archives"
+    sudo systemctl disable snapd.service
+    sudo systemctl disable snapd.socket
+    sudo systemctl disable snapd.seeded.service
+    sudo snap remove firefox
+    sudo snap remove snap-store
+    sudo snap remove gtk-common-themes
+    sudo snap remove gnome-3-38-2004
+    sudo snap remove core20
+    sudo snap remove snapd-desktop-integration
+    sudo rm -rf /var/cache/snapd/
+    sudo apt autoremove --purge snapd
+}
+function install_firefox(){
+    sudo add-apt-repository ppa:mozillateam/ppa -y
+    sudo apt update
+    sudo apt install -y firefox
+}
+
 function unmet_release(){
     echo "This configurator at this point is only valid for Ubuntu linux.\nPlease be adviced, that you use it on your own risk.\nFuture development will add compatibility for other distributions"
 }
@@ -92,6 +112,8 @@ RELEASE_NAME=$(awk -F= '/^NAME/{print $2}' /etc/os-release)
 if [ $RELEASE_NAME="Ubuntu" ]; then
     echo "Starting configuring new linux"
     update_release
+    remove_snap
+    install_firefox
     install_dependencies
     # get_docker_apps
     clear_apt_get
