@@ -6,6 +6,7 @@ echo "deb http://repository.spotify.com stable non-free" | sudo tee /etc/apt/sou
 sudo apt update && sudo apt install spotify-client -y
 
 # skype:
+wget -O https://go.skype.com/skypeforlinux-64.deb skype.deb
 sudo dpkg -i skype.deb
 
 # create opts dir:
