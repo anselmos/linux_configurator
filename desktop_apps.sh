@@ -12,21 +12,26 @@ sudo dpkg -i skype.deb
 # create opts dir:
 
 mkdir -p ${HOME}/opts/
+USER_HOME=${HOME}
 # pycharm:
 
 VERSION=2023.1.4
 wget https://download.jetbrains.com/python/pycharm-professional-${VERSION}.tar.gz -O ${HOME}/opts/pycharm-professional-${VERSION}.tar.gz
-cd ${HOME}/opts && tar -zxvf pycharm-professional-${VERSION}.tar.gz 
+PYCHARM_DIR=${HOME}/opts/pycharm
+mkdir -p ${PYCHARM_DIR}
+cd ${HOME}/opts && tar -zxvf pycharm-professional-${VERSION}.tar.gz -C ${PYCHARM_DIR} --strip-compoments=1
 rm -rf ${HOME}/opts/pycharm-professional-${VERSION}.tar.gz
-sudo ln -s ${HOME}/opts/pycharm-professional-${VERSION}/pycharm/bin/pycharm.sh /usr/bin/pycharm
+sudo ln -s ${USER_HOME}/opts/pycharm/bin/pycharm.sh /usr/bin/pycharm
 
 
 # phpstorm:
 VERSION=2023.1.4
 wget https://download.jetbrains.com/webide/PhpStorm-${VERSION}.tar.gz -O ${HOME}/opts/PhpStorm-${VERSION}.tar.gz
-cd ${HOME}/opts && tar -zxvf PhpStorm-${VERSION}.tar.gz 
+PHPSTORM_DIR=${HOME}/opts/phpstorm
+mkdir -p ${PHPSTORM_DIR}
+cd ${HOME}/opts && tar -zxvf PhpStorm-${VERSION}.tar.gz  -C ${PHPSTORM_DIR} --strip-components=1
 rm -rf ${HOME}/opts/PhpStorm-${VERSION}.tar.gz
-sudo ln -s ${HOME}/opts/PhpStorm-${VERSION}/phpstorm/bin/phpstorm.sh /usr/bin/phpstorm
+sudo ln -s ${USER_HOME}/opts/phpstorm/bin/phpstorm.sh /usr/bin/phpstorm
 
 
 # Postman:
@@ -34,4 +39,4 @@ wget https://dl.pstmn.io/download/latest/linux -O ${HOME}/opts/Postman.tar.gz
 
 cd ${HOME}/opts && tar -zxvf Postman.tar.gz 
 rm -rf ${HOME}/opts/Postman.tar.gz
-sudo ln -s ${HOME}/opts/Postman/Postman /usr/bin/Postman
+sudo ln -s ${USER_HOME}/opts/Postman/Postman /usr/bin/Postman
