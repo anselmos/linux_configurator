@@ -54,7 +54,13 @@ function install_streamripper(){
     sudo apt update && sudo apt install -y streamripper
 }
 
+function install_eog(){
+    # an Eye of Gnome - image viewer
+    sudo apt update && sudo apt install -y eog
+}
+
 # install_spotify
 # install_skype
 # install_dev_tools
 # install_streamripper
+# install_eog
