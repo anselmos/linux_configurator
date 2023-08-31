@@ -10,7 +10,7 @@ function command_with_echo(){
 }
 
 function apt_get_install(){
-    command_with_echo 'apt-get install -y '"$@"
+    command_with_echo 'sudo apt-get install -y '"$@"
 }
 
 function get_docker_apps(){
@@ -43,10 +43,8 @@ function install_dependencies(){
     echo "installing dependencies"
     apt_get_install "vim git curl wget gcc make tar"
     apt_get_install "gcc make"
-    apt_get_install "libevent-dev libncurses-dev"
     apt_get_install "ca-certificates curl gnupg"
-    install_tmux
-    install_docker
+    apt_get_install "libevent-dev libncurses-dev"
 }
 function install_tmux(){
     echo "Installing tmux 3.0!"
@@ -119,6 +117,8 @@ if [ $RELEASE_NAME="Ubuntu" ]; then
     remove_thunderbird
     install_firefox
     install_dependencies
+    install_tmux
+    install_docker
     # get_docker_apps
     clear_apt_get
 else
